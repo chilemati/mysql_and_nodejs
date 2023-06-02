@@ -1,0 +1,62 @@
+@import "./extends";
+@import "./mixims";
+@import "./variables";
+@import "./media-queries";
+
+.nav {
+  background-color: navy;
+  @include flex_between();
+  padding: 0.5rem 2rem;
+  .group1 {
+    gap: 2vw;
+    @include flex_between();
+    @include mobile {
+      display: none;
+      position: fixed;
+      //   top: 7.8%;
+      top: 0px;
+      left: 0px;
+      flex-direction: column;
+      border: 1px solid red;
+      background-color: navy;
+      width: 100%;
+      height: max-content;
+      .more {
+        @include flex_between();
+        flex-direction: column;
+        gap: 2vw;
+      }
+    }
+    @include desktop {
+      position: relative;
+      //   top: 0px;
+      //   left: 0px;
+      width: fit-content;
+      flex-direction: row;
+      display: flex;
+      .more {
+        @include flex_between();
+        flex-direction: row;
+        gap: 4vw;
+      }
+    }
+  }
+
+  .menu {
+    @include mobile {
+      display: flex;
+    }
+    @include desktop {
+      display: none;
+    }
+  }
+
+  a {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    &:hover {
+      color: red;
+    }
+  }
+}

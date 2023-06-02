@@ -1,0 +1,83 @@
+.nav {
+  background-color: navy;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+}
+.nav .group1 {
+  gap: 2vw;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+@media (min-width: 280px) {
+  .nav .group1 {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    flex-direction: column;
+    border: 1px solid red;
+    background-color: navy;
+    width: 100%;
+    height: max-content;
+  }
+  .nav .group1 .more {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 2vw;
+  }
+}
+@media (min-width: 1000px) {
+  .nav .group1 {
+    position: relative;
+    width: fit-content;
+    flex-direction: row;
+    display: flex;
+  }
+  .nav .group1 .more {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 4vw;
+  }
+}
+@media (min-width: 280px) {
+  .nav .menu {
+    display: flex;
+  }
+}
+@media (min-width: 1000px) {
+  .nav .menu {
+    display: none;
+  }
+}
+.nav a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+.nav a:hover {
+  color: red;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: white;
+  color: white;
+}
+
+/*# sourceMappingURL=Login.css.map */

@@ -1,0 +1,38 @@
+<nav class="nav">
+    <div class="logo"> <a href="http://localhost:4000/api/">Logo</a> </div>
+    <div class="group1 tog">
+        <div class="books"> <a href="http://localhost:4000/api/books">Books</a> </div>
+        <div class="products"> <a href="http://localhost:4000/api/allProducts">Products</a> </div>
+        <div class="more">
+                <div class="login"> <a href="http://localhost:4000/api/loginGet">Login</a> </div>
+                <div class="logout"> <a href="http://localhost:4000/api/logout">LogOut</a> </div>
+                
+            </div>
+        </div>
+        <div class="menu"> <a href="#">&#9776;</a> </div>
+
+    <script>
+        let group1 = document.querySelector('.group1');
+        let navLinks = document.querySelectorAll('.group1 a');
+        let menu = document.querySelector('.menu');
+        let body = document.querySelector('body');
+        body.setAttribute('class','body');
+        body.style.cssText=`min-height: 100vh; transition: all 0.8s each-in-out;`;
+        menu.addEventListener('click', (e)=> {
+            group1.style.display = 'flex';
+        })
+        body.addEventListener('click',(e)=> {
+            if(e.target.className === 'body') {
+                group1.style.display = 'none';
+                
+            }
+        });
+        navLinks.forEach(each=> {
+            each.addEventListener('click',(e)=> {
+                group1.style.display = 'none';
+
+            })
+        })
+    </script>
+
+</nav>
