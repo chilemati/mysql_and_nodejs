@@ -4,27 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Create Product</title>
     <link href="/css/Login.css" rel="stylesheet" type="text/css">
 </head>
 <body >
     <%- include('./partials/nav.ejs') %>
     <div class="login">
-        <h1>Login  </h1>
+        <h1>Create a Product  </h1>
 
     <div class="form">
         <form>
-            <div class="email">
-                <label for="email">Email</label>
-                <input type="text" name="email" id="email">
+            <div class="prodName email">
+                <label for="prodName">Product Name</label>
+                <input required type="text" name="prodName" id="prodName">
             </div>
-            <div class="password ">
-                <label for="password">Password</label>
-                <input type="text" name="password" id="password">
+            <div class="prodPrice email">
+                <label for="prodPrice">Product Price</label>
+                <input required type="number" name="prodPrice" id="prodPrice">
+            </div>
+            <div class="prodSnippet email">
+                <label for="prodSnippet ">Product Snippet</label>
+                <input required type="text" name="prodSnippet" id="prodSnippet">
+            </div>
+            <div class="prodDetails email">
+                <label for="prodDetails ">Product Details</label>
+                <input required type="text" name="prodDetails " id="prodDetails">
             </div>
             <div class="err "></div>
             <div class="btns">
-                <button>Login</button> | <a href="http://localhost:4000/api/signUpGet">SignUp</a>
+                <button>Create</button>
             </div>
         </form>
     </div>
@@ -35,10 +43,11 @@
 
         <script>
             let form = document.querySelector('.form form');
-            let email = document.querySelector('#email');
-            let password = document.querySelector('#password');
+            let prodName = document.querySelector('#prodName');
+            let prodPrice = document.querySelector('#prodPrice');
+            let prodDetails= document.querySelector('#prodDetails');
+            let prodSnippet= document.querySelector('#prodSnippet');
             let err = document.querySelector('.err');
-
              let send = ({url,type,body,cType})=> new Promise(function(accept,reject) {
                 let myInit;
                 if(type === 'GET') {
@@ -73,13 +82,15 @@
 
             form.addEventListener('submit',async(e)=> {
                 e.preventDefault(e);
-                // let formData = new FormData();
-                // formData.append('email',email.value);
-                // formData.append('password',password.value);
-                let upd= {email: email.value,password:password.value}
+                let upd= {
+                   prodName: prodName.value,
+                   prodDetails: prodDetails.value,
+                   prodPrice: prodPrice.value,
+                   prodSnippet: prodSnippet.value,
+                }
                 // console.log(upd);
                 let result = await send({
-                    url: 'http://localhost:4000/api/loginPost',
+                    url: 'http://localhost:4000/api/createProduct',
                     type: 'POST',
                     body: upd,
                 });

@@ -1,3 +1,4 @@
+const { currentUser } = require("../middlewares/allowLogin");
 const {
   createBook,
   allBooks,
@@ -26,7 +27,10 @@ exports.book_create = async (req, res, next) => {
 exports.book_get_all = (req, res, next) => {
   allBooks()
     .then((rep) => {
-      res.json(rep);
+      res.render("Books", {
+        books: rep,
+        user: currentUser.user,
+      });
     })
     .catch((err) => {
       res.json(err.message);

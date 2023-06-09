@@ -7,6 +7,12 @@
   background-color: navy;
   @include flex_between();
   padding: 0.5rem 2rem;
+  // .tog-show {
+  //   display: block;
+  // }
+  // .tog-hide {
+  //   display: none;
+  // }
   .group1 {
     gap: 2vw;
     @include flex_between();
@@ -17,7 +23,7 @@
       top: 0px;
       left: 0px;
       flex-direction: column;
-      border: 1px solid red;
+      // border: 1px solid red;
       background-color: navy;
       width: 100%;
       height: max-content;
@@ -34,6 +40,9 @@
       width: fit-content;
       flex-direction: row;
       display: flex;
+      .group1 {
+        display: flex;
+      }
       .more {
         @include flex_between();
         flex-direction: row;

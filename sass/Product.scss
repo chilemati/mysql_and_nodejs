@@ -1,0 +1,85 @@
+@import "./nav";
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.products {
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  .gallary {
+    @include grid(2);
+    gap: 1rem;
+    margin: 3rem 8%;
+    .prod {
+      // border: 1px solid red;
+      box-shadow: 8px 8px 8px rgb(0, 0, 0, 0.5);
+      border-radius: 12px;
+      width: 80%;
+      padding: 1rem;
+      .head {
+        text-align: center;
+        font-size: 2rem;
+        border-bottom: 1px solid gold;
+      }
+      .img {
+        height: 150px;
+        width: 150px;
+        margin: auto;
+        background-color: gray;
+        border-radius: 50%;
+        margin-top: 1rem;
+        border: 1px solid white;
+        &:hover {
+          margin-top: 1rem;
+          transform: scale(1.2);
+          background-color: white;
+        }
+      }
+      .title {
+        text-align: center;
+        font-size: 2rem;
+        color: red;
+        margin-top: 1.5rem;
+        font-weight: bold;
+      }
+      .snippet {
+        text-align: center;
+        margin-top: 0.7rem;
+        font-size: 1.3rem;
+        font-style: italic;
+      }
+      .footer {
+        @include flex-center();
+        margin-top: 1.6rem;
+        border-top: 1px solid gold;
+        padding: 0.5rem 0rem;
+        gap: 3vw;
+        a {
+          text-decoration: none;
+          color: purple;
+          font-size: 0.8rem;
+          font-weight: 400;
+          border: 1px solid navy;
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          &:hover {
+            border-color: transparent;
+            transition: all 0.5s ease-in-out;
+            background-color: lightcoral;
+            color: white;
+          }
+        }
+      }
+      &:hover {
+        transition: all 0.5s ease-in-out;
+        background-color: gray;
+        color: white;
+      }
+    }
+  }
+}

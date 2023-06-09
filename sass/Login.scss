@@ -1,4 +1,8 @@
 @import "./nav";
+@import "./extends";
+@import "./mixims";
+@import "./variables";
+@import "./media-queries";
 * {
   margin: 0px;
   padding: 0px;
@@ -7,4 +11,63 @@
 body {
   background-color: white;
   color: white;
+}
+
+.login {
+  margin-top: 3rem;
+  h1 {
+    text-align: center;
+  }
+
+  .form {
+    @include grid(1);
+    form {
+      margin-top: 2rem;
+      @include grid(1);
+      box-shadow: -8px 8px 8px gray;
+      border-radius: 20px;
+      width: 50%;
+      padding: 1rem;
+      gap: 2rem;
+      .email,
+      .password {
+        display: flex;
+        flex-direction: column;
+        width: inherit;
+        label {
+          font-size: 1.5rem;
+          font-weight: bold;
+          margin-bottom: 0.5rem;
+          &::after {
+            content: "*";
+            color: red;
+          }
+        }
+        input {
+          width: 100%;
+          height: 5vh;
+          outline: none;
+          border: 1px solid gray;
+          border-radius: 20px;
+          padding: 0.1rem 2rem;
+          &:focus {
+            border-color: purple;
+          }
+        }
+      }
+      .btns {
+        button {
+          outline: none;
+          border: 1px solid gray;
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          font-size: 1rem;
+          &:hover {
+            background-color: green;
+            color: white;
+          }
+        }
+      }
+    }
+  }
 }

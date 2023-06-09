@@ -5,9 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product</title>
+       <link href="/css/Product.css" rel="stylesheet" type="text/css">
+
 </head>
-<body>
+<body >
         <%- include('./partials/nav.ejs') %>
-    <h1>All Products</h1>
+        <div class="products">
+            <span>Welcome, <%= user  %>. Role: <%= role %> </span>
+            <h1>All Products</h1>
+
+            <div class="gallary">
+                <% if (products) { %>
+                    <% products.forEach(each => { %>
+                     <div class="prod">
+                        <div class="head">
+                            <div class="price">$<%= each.prodPrice %></div>
+            
+                        </div>
+                        <div class="img"></div>
+                        <div class="title"><%= each.prodName %></div>
+                        <div class="snippet"><%= each.prodSnippet %></div>
+                        <div class="footer">
+                            <a id="view" href="#" class="view">View</a>
+                            <a id="buy" href="#" class="buy">Buy Now</a>
+                            <a  id="Likes" name=<%= each.id  %> href='#' class="likes">Likes: <%= each.prodLikes %></a>
+                        </div>
+                     </div>
+                    <% }) %>
+                 
+                <% }else{ %>
+                    <h4>Unable to get Products</h4>
+                    <% } %>
+    
+            </div>
+
+            </div>
+
+            <script>
+                let likes = document.querySelectorAll('#Likes');
+                let view = document.querySelectorAll('#view');
+                let buy = document.querySelectorAll('#buy');
+                likes.forEach(each=> {
+                    each.addEventListener('click', async(e)=> {
+                        e.preventDefault(e);
+                        console.log(e.target.name)
+                     let result = await   fetch(`http://localhost:4000/api/likesGet/${e.target.name}`, {
+                            method: 'GET',
+                            headers: {'Content-Type': 'application/json'},
+                            withCredentials: true
+                        })
+                        result = result.json();
+                        if(!result.err){
+                            location.reload();
+                        } 
+                    });
+
+                    view.forEach(each=> {
+                        each.addEventListener('click',(e)=> {
+                            e.preventDefault(e);
+                        })
+                    })
+                    buy.forEach(each=> {
+                        each.addEventListener('click',(e)=> {
+                            e.preventDefault(e);
+                        })
+                    })
+
+                   
+
+                })
+            </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
-exports.createCookie = (res, token) => {
+exports.createCookie = (res, token, min) => {
   res.cookie("jwt", token, {
-    maxAge: 1000 * 60 * 1.2,
+    maxAge: 1000 * 60 * min,
     httpOnly: true,
   });
 };

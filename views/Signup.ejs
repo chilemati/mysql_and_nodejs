@@ -10,7 +10,7 @@
 <body >
     <%- include('./partials/nav.ejs') %>
     <div class="login">
-        <h1>Login  </h1>
+        <h1>SignUp  </h1>
 
     <div class="form">
         <form>
@@ -24,7 +24,7 @@
             </div>
             <div class="err "></div>
             <div class="btns">
-                <button>Login</button> | <a href="http://localhost:4000/api/signUpGet">SignUp</a>
+                <button>Create Account</button> | <a href="http://localhost:4000/api/loginGet">Login</a>
             </div>
         </form>
     </div>
@@ -79,7 +79,7 @@
                 let upd= {email: email.value,password:password.value}
                 // console.log(upd);
                 let result = await send({
-                    url: 'http://localhost:4000/api/loginPost',
+                    url: 'http://localhost:4000/api/createuser',
                     type: 'POST',
                     body: upd,
                 });
@@ -87,10 +87,10 @@
                 if(result.status) {
                     location.assign('http://localhost:4000/api/allProducts');
                 }else{
-                    err.textContent = result.err;
+                    console.log(result.err);
+                   err.textContent = result.err;
                     err.style.color='red';
                 }
-                // console.log(result);
             })
 
            

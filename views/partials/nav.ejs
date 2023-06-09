@@ -1,11 +1,17 @@
 <nav class="nav">
-    <div class="logo"> <a href="http://localhost:4000/api/">Logo</a> </div>
-    <div class="group1 tog">
+    <div class="logo"> <a href="http://localhost:4000/api/">Logo </a> </div>
+    <div class="group1">
         <div class="books"> <a href="http://localhost:4000/api/books">Books</a> </div>
-        <div class="products"> <a href="http://localhost:4000/api/allProducts">Products</a> </div>
+        <div class="products"> <a  href="http://localhost:4000/api/allProducts">Products</a> </div>
         <div class="more">
-                <div class="login"> <a href="http://localhost:4000/api/loginGet">Login</a> </div>
+            <% if (user) { %>
+                <div class="crateBook"> <a href="http://localhost:4000/api/">Create Book</a> </div>
+                <div class="createProduct"> <a href="http://localhost:4000/api/createProduct">Create Product</a> </div>
                 <div class="logout"> <a href="http://localhost:4000/api/logout">LogOut</a> </div>
+             
+            <% }else{ %>
+                <div class="signin"> <a href="http://localhost:4000/api/loginGet">Login</a> </div>
+                <% } %>
                 
             </div>
         </div>
@@ -17,22 +23,72 @@
         let menu = document.querySelector('.menu');
         let body = document.querySelector('body');
         body.setAttribute('class','body');
-        body.style.cssText=`min-height: 100vh; transition: all 0.8s each-in-out;`;
+        body.style.cssText=`min-height: 100vh; transition: all 0.8s each-in-out; color: green;`;
+        let states ={mobile: '', desktop:'' };
+           var phone= window.matchMedia("(max-width: 999px)");
+           var desktop= window.matchMedia("(min-width: 1000px)");
+           states.mobile = phone.matches;
+           states.desktop = desktop.matches;
+        phone.addListener((width)=> {
+           if(width.matches) {
+               group1.style.cssText = `display: none`;
+             states.mobile = true;
+           }else{
+             states.mobile = false;
+
+           }
+        })
+        desktop.addListener((width)=> {
+           if(width.matches) {
+            states.desktop = true;
+            group1.style.cssText = `display: flex`;
+        }else{
+               states.desktop = false;
+
+           }
+        })
+
         menu.addEventListener('click', (e)=> {
-            group1.style.display = 'flex';
+            group1.style.cssText = `display: flex`;
+            // group1.setAttribute('class','tog-show');
         })
         body.addEventListener('click',(e)=> {
+            // console.log(states);
             if(e.target.className === 'body') {
-                group1.style.display = 'none';
+                if(states.mobile) {
+                    group1.style.cssText = `display: none`;
+
+                }
+                if(states.desktop) {
+                    group1.style.cssText = `display: flex`;
+
+                }
                 
             }
+        
         });
         navLinks.forEach(each=> {
             each.addEventListener('click',(e)=> {
-                group1.style.display = 'none';
+
+                 group1.style.cssText = `display: none`;
 
             })
         })
+
+   async function getProducts() {
+        // http://localhost:4000/api/allProducts
+        
+            let prod = await  fetch('http://localhost:4000/api/allProducts',
+             {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                 withCredentials: true,
+             });
+            console.log(prod.json());
+            }
+
     </script>
 
 </nav>

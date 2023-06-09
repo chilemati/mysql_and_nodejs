@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+       <link href="/css/Product.css" rel="stylesheet" type="text/css">
+
+</head>
+<body >
+        <%- include('./partials/nav.ejs') %>
+        <div class="products">
+            <h1>All Books</h1>
+            <div class="gallary">
+                <% if (books) { %>
+                    <% books.forEach(each => { %>
+                     <div class="prod">
+                        <div class="img"></div>
+                        <div class="title">Title: <%= each.title %></div>
+                        <div class="snippet">Author: <%= each.author %></div>
+                        <div class="snippet">Release Date: <%= each.release_date %></div>
+                        <div class="footer">
+                            <a href="#" class="view">View</a>
+                            <a href="#" class="buy">Buy Now</a>
+                        </div>
+                     </div>
+                    <% }) %>
+                 
+                <% }else{ %>
+                    <h4>Unable to get Products</h4>
+                    <% } %>
+    
+            </div>
+
+            </div>
+</body>
+</html>

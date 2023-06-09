@@ -164,3 +164,29 @@ exports.updateProduct = (obj) =>
         reject(error.message);
       });
   });
+exports.updateLikes = (obj) =>
+  new Promise(function (accept, reject) {
+    sequelize
+      .sync()
+      .then(() => {
+        Book.increment(
+          { prodLikes: 1 },
+          {
+            where: {
+              id: obj.id,
+            },
+          }
+        )
+          .then(async (rep) => {
+            rep = Object.assign(rep, obj);
+
+            accept(await rep.save());
+          })
+          .catch((error) => {
+            reject(error.message);
+          });
+      })
+      .catch((error) => {
+        reject(error.message);
+      });
+  });

@@ -6,6 +6,7 @@ const {
   deleteOneProduct,
   findProductBasedOn,
   updateProduct,
+  updateLikes,
 } = require("../models/productModel");
 
 exports.product_create = async (req, res, next) => {
@@ -28,10 +29,32 @@ exports.product_create = async (req, res, next) => {
 exports.product_get_all = (req, res, next) => {
   allProducts()
     .then((rep) => {
-      res.json({ status: `Welcome back ${currentUser.user}`, rep });
+      res.render("Products", {
+        products: rep,
+        user: currentUser.user,
+        role: currentUser.role,
+      });
     })
     .catch((err) => {
       res.json(err.message);
+    });
+};
+exports.product_get_create = (req, res, next) => {
+  res.render("createProduct", { user: "" });
+};
+exports.product_get_likes = (req, res, next) => {
+  updateLikes({ id: req.params.id })
+    .then((rep) => {
+      allProducts()
+        .then((rep) => {
+          res.render("Products", { products: rep, user: currentUser.user });
+        })
+        .catch((err) => {
+          res.json(err.message);
+        });
+    })
+    .catch((err) => {
+      res.json({ err: false });
     });
 };
 exports.product_post_single = async (req, res, next) => {

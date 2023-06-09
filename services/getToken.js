@@ -4,7 +4,7 @@ let { JWT_SECRET } = process.env;
 exports.getToken = (payload) =>
   new Promise(async function (accept, reject) {
     try {
-      let token = jwt.sign(payload, JWT_SECRET, { expiresIn: 60 * 1000 * 1.2 });
+      let token = jwt.sign(payload, JWT_SECRET, { expiresIn: 60 * 1000 * 5.2 });
       accept(token);
     } catch (error) {
       reject(error.message);

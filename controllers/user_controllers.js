@@ -14,21 +14,30 @@ const { hashIt } = require("../services/hashIt");
 
 exports.user_create = async (req, res, next) => {
   let { email, password } = req.body;
-  password = await hashIt(password);
-  let token = await getToken({ email, password: password });
-  createCookie(res, token);
-  // res.json({ status: "Created", body: { email, hPassword }, token });
-  let toDb = {
-    email,
-    password,
-  };
-  createUser(toDb)
-    .then((rep) => {
-      res.redirect("/api/login");
-    })
-    .catch((err) => {
-      res.json({ status: "failed", reply: err });
-    });
+  if (password && email) {
+    password = await hashIt(password);
+    let token = await getToken({ email, password: password });
+    createCookie(res, token, 5.2);
+    // res.json({ status: "Created", body: { email, hPassword }, token });
+    let toDb = {
+      email,
+      password,
+    };
+    createUser(toDb)
+      .then((rep) => {
+        // res.redirect("/api/login");
+        res.json({ status: "New user Crated!" });
+      })
+      .catch((err) => {
+        res.json({
+          err: err.includes("Validation error")
+            ? "User already Exists!!!"
+            : err.message,
+        });
+      });
+  } else {
+    res.json({ err: "Provide login Details" });
+  }
 };
 
 exports.user_get_all = (req, res, next) => {
@@ -42,14 +51,16 @@ exports.user_get_all = (req, res, next) => {
 };
 exports.user_post_login = async (req, res, next) => {
   let { email, password } = req.body;
+  // console.log(req.body);
   if (email && password) {
     findUserBasedOn({ email: email })
       .then(async (rep) => {
-        console.log("rep", rep);
-        let verified = compareIt(password, rep.password);
+        // console.log("rep", rep);
+        let verified = await compareIt(password, rep.password);
+        console.log(verified);
         if (verified) {
           let token = await getToken({ email: email });
-          createCookie(res, token);
+          createCookie(res, token, 5.2);
           res.json({ status: "access granted!" });
         } else {
           res.json({ err: "wrong  passord" });
@@ -63,20 +74,18 @@ exports.user_post_login = async (req, res, next) => {
   }
 };
 exports.user_get_login = async (req, res, next) => {
-  // res.json({
-  //   status: `I'm sorry${
-  //     currentUser.user
-  //       ? `${currentUser.user}. Please login as Admin to continue.`
-  //       : ". Please login to continue."
-  //   }`,
-  // });
-  res.render("Login", { user: currentUser.user });
+  res.render("Login", { user: "" });
+};
+exports.user_get_signup = async (req, res, next) => {
+  res.render("Signup", { user: "" });
 };
 exports.user_get_logout = (req, res, next) => {
-  res.json({ status: "logged out!" });
+  res.cookie("jwt", "", { maxAge: 1 });
+  currentUser.user = "";
+  res.render("Home", { user: currentUser.user });
 };
 exports.home = (req, res, next) => {
-  res.render("Home");
+  res.render("Home", { user: currentUser.user });
 };
 exports.user_post_single = async (req, res, next) => {
   let { id } = req.body;

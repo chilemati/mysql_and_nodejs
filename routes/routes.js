@@ -13,6 +13,8 @@ const {
   product_delete_single,
   product_post_findMany,
   product_post_update,
+  product_get_likes,
+  product_get_create,
 } = require("../controllers/products_controllers");
 const {
   user_create,
@@ -25,6 +27,7 @@ const {
   user_post_update,
   user_get_login,
   home,
+  user_get_signup,
 } = require("../controllers/user_controllers");
 const { allowLogin } = require("../middlewares/allowLogin");
 const { onlyAdmins } = require("../middlewares/onlyAdmins");
@@ -43,21 +46,26 @@ routes.post("/findMany", book_post_findMany);
 
 // module.exports = productRoutes;
 routes.post("/createProduct", product_create);
+routes.get("/createProduct", product_get_create);
 routes.get("/allProducts", allowLogin, product_get_all);
 routes.post("/singleProducts", product_post_single);
 routes.delete("/deleteProduct", product_delete_single);
 routes.post("/findManyProduct", product_post_findMany);
 routes.post("/updateProduct", product_post_update);
+routes.get("/likesGet/:id", product_get_likes);
 
 // module.exports = userRoutes;
 routes.post("/createuser", user_create);
 routes.get("/allusers", allowLogin, onlyAdmins, user_get_all);
 routes.post("/loginPost", user_post_login);
 routes.get("/loginGet", user_get_login);
+routes.get("/signUpGet", user_get_signup);
 routes.get("/logout", user_get_logout);
 routes.post("/singleusers", onlyAdmins_and_subAdmins, user_post_single);
 routes.delete("/deleteuser", user_delete_single);
 routes.post("/findManyuser", user_post_findMany);
 routes.post("/updateuser", onlyAdmins, user_post_update);
-
+// routes.get('idso', (req, res) => {
+//   res.locals.isLoggedIn = true;
+// })
 module.exports = routes;

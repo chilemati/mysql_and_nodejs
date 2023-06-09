@@ -1,0 +1,161 @@
+.nav {
+  background-color: navy;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+}
+.nav .group1 {
+  gap: 2vw;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+@media (min-width: 280px) {
+  .nav .group1 {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    flex-direction: column;
+    background-color: navy;
+    width: 100%;
+    height: max-content;
+  }
+  .nav .group1 .more {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 2vw;
+  }
+}
+@media (min-width: 1000px) {
+  .nav .group1 {
+    position: relative;
+    width: fit-content;
+    flex-direction: row;
+    display: flex;
+  }
+  .nav .group1 .group1 {
+    display: flex;
+  }
+  .nav .group1 .more {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 4vw;
+  }
+}
+@media (min-width: 280px) {
+  .nav .menu {
+    display: flex;
+  }
+}
+@media (min-width: 1000px) {
+  .nav .menu {
+    display: none;
+  }
+}
+.nav a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+.nav a:hover {
+  color: red;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.products h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: bold;
+}
+.products .gallary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  gap: 1rem;
+  margin: 3rem 8%;
+}
+.products .gallary .prod {
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  width: 80%;
+  padding: 1rem;
+}
+.products .gallary .prod .head {
+  text-align: center;
+  font-size: 2rem;
+  border-bottom: 1px solid gold;
+}
+.products .gallary .prod .img {
+  height: 150px;
+  width: 150px;
+  margin: auto;
+  background-color: gray;
+  border-radius: 50%;
+  margin-top: 1rem;
+  border: 1px solid white;
+}
+.products .gallary .prod .img:hover {
+  margin-top: 1rem;
+  transform: scale(1.2);
+  background-color: white;
+}
+.products .gallary .prod .title {
+  text-align: center;
+  font-size: 2rem;
+  color: red;
+  margin-top: 1.5rem;
+  font-weight: bold;
+}
+.products .gallary .prod .snippet {
+  text-align: center;
+  margin-top: 0.7rem;
+  font-size: 1.3rem;
+  font-style: italic;
+}
+.products .gallary .prod .footer {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin-top: 1.6rem;
+  border-top: 1px solid gold;
+  padding: 0.5rem 0rem;
+  gap: 3vw;
+}
+.products .gallary .prod .footer a {
+  text-decoration: none;
+  color: purple;
+  font-size: 0.8rem;
+  font-weight: 400;
+  border: 1px solid navy;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+.products .gallary .prod .footer a:hover {
+  border-color: transparent;
+  transition: all 0.5s ease-in-out;
+  background-color: lightcoral;
+  color: white;
+}
+.products .gallary .prod:hover {
+  transition: all 0.5s ease-in-out;
+  background-color: gray;
+  color: white;
+}
+
+/*# sourceMappingURL=Product.css.map */

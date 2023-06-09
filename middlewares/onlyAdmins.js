@@ -1,5 +1,6 @@
 const { findUserBasedOn } = require("../models/Users");
 const { veriyToken } = require("../services/verifyToken");
+const { currentUser } = require("./allowLogin");
 
 exports.onlyAdmins = async (req, res, next) => {
   if (req.cookies.jwt) {
@@ -10,9 +11,12 @@ exports.onlyAdmins = async (req, res, next) => {
       .then((rep) => {
         // console.log(rep[0].dataValues.role);
         if (rep.role === "Admin") {
+          currentUser.role = "subAdmin";
           next();
         } else {
+          currentUser.role = "Basic";
           res.json({ err: `Only Admins can access!` });
+          // res.redirect("Home");
         }
       })
       .catch((err) => {

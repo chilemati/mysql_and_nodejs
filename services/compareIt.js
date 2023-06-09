@@ -4,9 +4,9 @@ exports.compareIt = (text, hashed) =>
     bcrypt.compare(text, hashed, function (err, result) {
       // result == true
       if (err) {
-        reject(false);
+        reject(err);
       } else {
-        accept(true);
+        accept(result);
       }
     });
   });
